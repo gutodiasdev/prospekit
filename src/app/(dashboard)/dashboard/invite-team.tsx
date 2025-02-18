@@ -1,20 +1,20 @@
 'use client';
 
+import { inviteTeamMember } from '@/src/app/(login)/actions';
 import { Button } from '@/src/components/ui/button';
-import { Input } from '@/src/components/ui/input';
 import {
   Card,
   CardContent,
+  CardFooter,
   CardHeader,
-  CardTitle,
-  CardFooter
+  CardTitle
 } from '@/src/components/ui/card';
-import { Loader2, PlusCircle } from 'lucide-react';
-import { RadioGroup, RadioGroupItem } from '@/src/components/ui/radio-group';
+import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
-import { use, useActionState } from 'react';
-import { inviteTeamMember } from '@/src/app/(login)/actions';
+import { RadioGroup, RadioGroupItem } from '@/src/components/ui/radio-group';
 import { useUser } from '@/src/lib/auth';
+import { Loader2, PlusCircle } from 'lucide-react';
+import { use, useActionState } from 'react';
 
 type ActionState = {
   error?: string;
@@ -33,7 +33,7 @@ export function InviteTeamMember() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Invite Team Member</CardTitle>
+        <CardTitle>Convidar membro para o time</CardTitle>
       </CardHeader>
       <CardContent>
         <form action={inviteAction} className="space-y-4">
@@ -58,11 +58,11 @@ export function InviteTeamMember() {
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="member" id="member" />
-                <Label htmlFor="member">Member</Label>
+                <Label htmlFor="member">Membro</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="owner" id="owner" />
-                <Label htmlFor="owner">Owner</Label>
+                <Label htmlFor="owner">Admin</Label>
               </div>
             </RadioGroup>
           </div>
@@ -74,18 +74,18 @@ export function InviteTeamMember() {
           )}
           <Button
             type="submit"
-            className="bg-orange-500 hover:bg-orange-600 text-white"
+            className="bg-gray-900 hover:bg-orange-600 text-white"
             disabled={isInvitePending || !isOwner}
           >
             {isInvitePending ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Inviting...
+                Convidando...
               </>
             ) : (
               <>
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Invite Member
+                Convidar membro
               </>
             )}
           </Button>
@@ -94,7 +94,7 @@ export function InviteTeamMember() {
       {!isOwner && (
         <CardFooter>
           <p className="text-sm text-muted-foreground">
-            You must be a team owner to invite new members.
+            Você precisa ser um administrador para convidar novos membros
           </p>
         </CardFooter>
       )}
