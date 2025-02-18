@@ -1,12 +1,12 @@
 'use client';
 
+import { deleteAccount, updatePassword } from '@/src/app/(login)/actions';
 import { Button } from '@/src/components/ui/button';
-import { Input } from '@/src/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { Input } from '@/src/components/ui/input';
 import { Label } from '@/src/components/ui/label';
-import { Lock, Trash2, Loader2 } from 'lucide-react';
+import { Loader2, Lock, Trash2 } from 'lucide-react';
 import { startTransition, useActionState } from 'react';
-import { updatePassword, deleteAccount } from '@/src/app/(login)/actions';
 
 type ActionState = {
   error?: string;
@@ -52,16 +52,16 @@ export default function SecurityPage() {
   return (
     <section className="flex-1 p-4 lg:p-8">
       <h1 className="text-lg lg:text-2xl font-medium bold text-gray-900 mb-6">
-        Security Settings
+        Configurações de segurança
       </h1>
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Password</CardTitle>
+          <CardTitle>Senha</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" onSubmit={handlePasswordSubmit}>
             <div>
-              <Label htmlFor="current-password">Current Password</Label>
+              <Label htmlFor="current-password">Senha atual</Label>
               <Input
                 id="current-password"
                 name="currentPassword"
@@ -73,7 +73,7 @@ export default function SecurityPage() {
               />
             </div>
             <div>
-              <Label htmlFor="new-password">New Password</Label>
+              <Label htmlFor="new-password">Nova senha</Label>
               <Input
                 id="new-password"
                 name="newPassword"
@@ -85,7 +85,7 @@ export default function SecurityPage() {
               />
             </div>
             <div>
-              <Label htmlFor="confirm-password">Confirm New Password</Label>
+              <Label htmlFor="confirm-password">Confirmar nova senha</Label>
               <Input
                 id="confirm-password"
                 name="confirmPassword"
@@ -103,18 +103,18 @@ export default function SecurityPage() {
             )}
             <Button
               type="submit"
-              className="bg-orange-500 hover:bg-orange-600 text-white"
+              className="bg-gray-900 hover:bg-orange-600 text-white"
               disabled={isPasswordPending}
             >
               {isPasswordPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Updating...
+                  Atualizando...
                 </>
               ) : (
                 <>
                   <Lock className="mr-2 h-4 w-4" />
-                  Update Password
+                  Atualizar senha
                 </>
               )}
             </Button>
@@ -124,15 +124,15 @@ export default function SecurityPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Delete Account</CardTitle>
+          <CardTitle>Deletar conta</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-gray-500 mb-4">
-            Account deletion is non-reversable. Please proceed with caution.
+            Deletar conta não pode ser desfeito. Proceda com cuidado.
           </p>
           <form onSubmit={handleDeleteSubmit} className="space-y-4">
             <div>
-              <Label htmlFor="delete-password">Confirm Password</Label>
+              <Label htmlFor="delete-password">Confirma com a sua senha</Label>
               <Input
                 id="delete-password"
                 name="password"
@@ -154,12 +154,12 @@ export default function SecurityPage() {
               {isDeletePending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Deleting...
+                  Deletando...
                 </>
               ) : (
                 <>
                   <Trash2 className="mr-2 h-4 w-4" />
-                  Delete Account
+                  Deletar conta
                 </>
               )}
             </Button>

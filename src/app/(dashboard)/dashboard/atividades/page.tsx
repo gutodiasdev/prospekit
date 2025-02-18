@@ -1,18 +1,18 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { getActivityLogs } from '@/src/lib/db/queries';
+import { ActivityType } from '@/src/lib/db/schema';
 import {
-  Settings,
-  LogOut,
-  UserPlus,
-  Lock,
-  UserCog,
   AlertCircle,
-  UserMinus,
-  Mail,
   CheckCircle,
+  Lock,
+  LogOut,
+  Mail,
+  Settings,
+  UserCog,
+  UserMinus,
+  UserPlus,
   type LucideIcon,
 } from 'lucide-react';
-import { ActivityType } from '@/src/lib/db/schema';
-import { getActivityLogs } from '@/src/lib/db/queries';
 
 const iconMap: Record<ActivityType, LucideIcon> = {
   [ActivityType.SIGN_UP]: UserPlus,
@@ -44,27 +44,27 @@ function getRelativeTime(date: Date) {
 function formatAction(action: ActivityType): string {
   switch (action) {
     case ActivityType.SIGN_UP:
-      return 'You signed up';
+      return 'Você criou sua conta';
     case ActivityType.SIGN_IN:
-      return 'You signed in';
+      return 'Você fez login';
     case ActivityType.SIGN_OUT:
-      return 'You signed out';
+      return 'Você saiu';
     case ActivityType.UPDATE_PASSWORD:
-      return 'You changed your password';
+      return 'Você mudou sua senha';
     case ActivityType.DELETE_ACCOUNT:
-      return 'You deleted your account';
+      return 'Você excluiu sua conta';
     case ActivityType.UPDATE_ACCOUNT:
-      return 'You updated your account';
+      return 'Você atualizou sua conta';
     case ActivityType.CREATE_TEAM:
-      return 'You created a new team';
+      return 'Você criou um novo time';
     case ActivityType.REMOVE_TEAM_MEMBER:
-      return 'You removed a team member';
+      return 'Você removeu um membro do time';
     case ActivityType.INVITE_TEAM_MEMBER:
-      return 'You invited a team member';
+      return 'Você convidou um membro para o time';
     case ActivityType.ACCEPT_INVITATION:
-      return 'You accepted an invitation';
+      return 'Você aceitou um convite';
     default:
-      return 'Unknown action occurred';
+      return 'Uma ação desconhecida ocorreu';
   }
 }
 
@@ -74,11 +74,11 @@ export default async function ActivityPage() {
   return (
     <section className="flex-1 p-4 lg:p-8">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        Activity Log
+        Log de atividades
       </h1>
       <Card>
         <CardHeader>
-          <CardTitle>Recent Activity</CardTitle>
+          <CardTitle>Atividades recentes</CardTitle>
         </CardHeader>
         <CardContent>
           {logs.length > 0 ? (
@@ -109,13 +109,12 @@ export default async function ActivityPage() {
             </ul>
           ) : (
             <div className="flex flex-col items-center justify-center text-center py-12">
-              <AlertCircle className="h-12 w-12 text-orange-500 mb-4" />
+              <AlertCircle className="h-12 w-12 text-gray-900 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                No activity yet
+                Nenhum atividade ainda
               </h3>
               <p className="text-sm text-gray-500 max-w-sm">
-                When you perform actions like signing in or updating your
-                account, they'll appear here.
+                Algumas ações que você faça durante o uso da aplicação podem aparecer aqui.
               </p>
             </div>
           )}

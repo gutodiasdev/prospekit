@@ -1,13 +1,13 @@
 'use client';
 
-import { startTransition, use, useActionState } from 'react';
-import { Button } from '@/src/components/ui/button';
-import { Input } from '@/src/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
-import { Label } from '@/src/components/ui/label';
-import { Loader2 } from 'lucide-react';
-import { useUser } from '@/src/lib/auth';
 import { updateAccount } from '@/src/app/(login)/actions';
+import { Button } from '@/src/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { Input } from '@/src/components/ui/input';
+import { Label } from '@/src/components/ui/label';
+import { useUser } from '@/src/lib/auth';
+import { Loader2 } from 'lucide-react';
+import { startTransition, use, useActionState } from 'react';
 
 type ActionState = {
   error?: string;
@@ -39,17 +39,17 @@ export default function GeneralPage() {
   return (
     <section className="flex-1 p-4 lg:p-8">
       <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        General Settings
+        Configurações
       </h1>
 
       <Card>
         <CardHeader>
-          <CardTitle>Account Information</CardTitle>
+          <CardTitle>Informações da conta</CardTitle>
         </CardHeader>
         <CardContent>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">Nome</Label>
               <Input
                 id="name"
                 name="name"
@@ -77,16 +77,16 @@ export default function GeneralPage() {
             )}
             <Button
               type="submit"
-              className="bg-orange-500 hover:bg-orange-600 text-white"
+              className="bg-gray-900 hover:bg-orange-600 text-white"
               disabled={isPending}
             >
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Saving...
+                  Salvando...
                 </>
               ) : (
-                'Save Changes'
+                'Salvar'
               )}
             </Button>
           </form>

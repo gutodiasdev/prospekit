@@ -1,12 +1,13 @@
 'use client';
 
-import { Button } from '@/src/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/src/components/ui/avatar';
-import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
-import { customerPortalAction } from '@/src/lib/payments/actions';
-import { useActionState } from 'react';
-import { TeamDataWithMembers, User } from '@/src/lib/db/schema';
 import { removeTeamMember } from '@/src/app/(login)/actions';
+import { Avatar, AvatarFallback, AvatarImage } from '@/src/components/ui/avatar';
+import { Button } from '@/src/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
+import { TeamDataWithMembers, User } from '@/src/lib/db/schema';
+import { customerPortalAction } from '@/src/lib/payments/actions';
+import { ExternalLink } from 'lucide-react';
+import { useActionState } from 'react';
 import { InviteTeamMember } from './invite-team';
 
 type ActionState = {
@@ -26,29 +27,30 @@ export function Settings({ teamData }: { teamData: TeamDataWithMembers }) {
 
   return (
     <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium mb-6">Team Settings</h1>
+      <h1 className="text-lg lg:text-2xl font-medium mb-6">Configurações do time</h1>
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Team Subscription</CardTitle>
+          <CardTitle>Inscrição do time</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
               <div className="mb-4 sm:mb-0">
                 <p className="font-medium">
-                  Current Plan: {teamData.planName || 'Free'}
+                  Plano atual: {teamData.planName || 'Gratuito'}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   {teamData.subscriptionStatus === 'active'
-                    ? 'Billed monthly'
+                    ? 'Cobrado mensalmente'
                     : teamData.subscriptionStatus === 'trialing'
-                      ? 'Trial period'
-                      : 'No active subscription'}
+                      ? 'Período de teste'
+                      : 'Sem inscrição ativa'}
                 </p>
               </div>
               <form action={customerPortalAction}>
-                <Button type="submit" variant="outline">
-                  Manage Subscription
+                <Button type="submit" variant="outline" className='flex items-center gap-2'>
+                  Administrar inscrição
+                  <ExternalLink className='w-4 h-4' />
                 </Button>
               </form>
             </div>
@@ -57,7 +59,7 @@ export function Settings({ teamData }: { teamData: TeamDataWithMembers }) {
       </Card>
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Team Members</CardTitle>
+          <CardTitle>Membros do time</CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-4">
